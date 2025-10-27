@@ -1,18 +1,13 @@
 export default ({ env }) => ({
+  url: env("ADMIN_URL", "/admin"),
+  host: env("HOST", "0.0.0.0"),
+  port: env.int("PORT", 1337),
   auth: {
     secret: env("ADMIN_JWT_SECRET"),
     sessions: {
       // Конфігурація для Strapi 5
       maxRefreshTokenLifespan: 1000 * 60 * 60 * 24 * 7, // 7 днів
       maxSessionLifespan: 1000 * 60 * 60 * 24, // 1 день
-    },
-  },
-  // Налаштування для HTTPS на продакшені
-  session: {
-    keys: env.array("APP_KEYS"),
-    cookie: {
-      secure: env("NODE_ENV") === "production",
-      sameSite: "lax",
     },
   },
   apiToken: {

@@ -7,6 +7,14 @@ export default ({ env }) => ({
       maxSessionLifespan: 1000 * 60 * 60 * 24, // 1 день
     },
   },
+  // Налаштування для HTTPS на продакшені
+  session: {
+    keys: env.array("APP_KEYS"),
+    cookie: {
+      secure: env("NODE_ENV") === "production",
+      sameSite: "lax",
+    },
+  },
   apiToken: {
     salt: env("API_TOKEN_SALT"),
   },
